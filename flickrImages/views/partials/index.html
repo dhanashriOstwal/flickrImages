@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+    <script src="https://code.angularjs.org/1.4.8/angular.min.js"></script>
+    <script src="controller1.js"></script>
+    <link rel="stylesheet" href="images.css">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <title>NASA Images</title>
+    </head>
+    <body> 
+        <div ng-app="myApp" ng-controller="appController">
+            <div class= "container-fluid wrapper">
+                <div align="center">
+                
+                    <!--Displays the header and the NASA banner-->
+                    <div class = "form-group">
+                        <div class="jumbotron header control-label">
+                            <h3 class="control-label">NASA Images</h3>
+                        </div>
+                    </div>
+                    
+                    <!--Displays the sidebar and the main section on load-->
+                    <div ng-show="display" class = "row">
+                        <div class = "col-xs-4 col-sm-4 col-md-4 col-lg-4 sidebar-wrapper">
+                            <div class = "form-group">
+                            
+                                <!--Sorting of images based on their title (Default is ascending)-->
+                                <label for ="sel1"> Sort By:</label> 
+                                <select class="form-control" ng-model="sortOrder">
+                                    <option value="+key">Image Title (A-Z)</option>
+                                    <option value="-key">Image Title (Z-A)</option>
+                                </select>
+                                <br/>
+                                
+                                <!--Searching based on image title-->
+                                <div class = "form-group">
+                                    <label for ="srch">Search:</label> 
+                                    <input type="text" class="form-control" ng-model="search"/>
+                                </div>
+                                
+                                <!--Number of Images to be displayed on a page-->
+                                <label for ="srch">Limit Images:</label> 
+                                <select ng-model="pageSize" id="pageSize" class="form-control">
+                                    <option value="5">5</option>
+                                    <option value="10">10</option>
+                                    <option value="15">15</option>
+                                    <option value="20">20</option>
+                                    <option value="all">All</option>
+                                </select>
+                            </div>
+                        </div>
+                         
+                        <!--Images display-->
+                        <div class = "col-xs-8 col-sm-8 col-md-8 col-lg-8 main-wrapper">
+                            <div class = "imgdiv" ng-repeat = "imgpath in imgpaths | filter:search | orderBy:sortOrder | startFrom:currentPage*pageSize | limitTo:pageSize" >
+                                <img ng-src = {{imgpath.value}} title = {{imgpath.key}} class = "imgstyle img-responsive img-rounded" data-toggle="modal" data-target="#myModal{{$index}}"></img>
+                                
+                                <!--On clicking on the image, the image pops up-->
+                                <div class="modal fade" id="myModal{{$index}}" role="dialog">
+                                    <div class="modal-dialog">
+                                        <!-- Modal content-->
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                <h4 class="modal-title">{{imgpath.key}}</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <img ng-src = {{imgpath.value}} title = {{imgpath.key}} class ="img-responsive"></img>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br/>
+                            
+                            <!--Previous and next page display(not shown when all images are displayed on the same page)-->
+                            <div ng-show="pageSize != 'all'">
+                                <button class = "btn btn-default" ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1">Previous</button>
+                                {{currentPage+1}}/{{numberOfPages()}}
+                                <button class = "btn btn-default" ng-disabled="currentPage >= imgpaths.length/pageSize - 1" ng-click="currentPage=currentPage+1">Next</button>
+                            </div> 
+                            <br/>
+                        </div>
+                    </div>      <!--end row class-->
+                </div>
+            </div>
+        </div>
+        
+    </body>
+</html>

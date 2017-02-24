@@ -1,0 +1,6 @@
+---
+applications:
+- name:    flickrImages
+  host:    flickrImages-dvo
+  memory:  128M
+  command: node server.js

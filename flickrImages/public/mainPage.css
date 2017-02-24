@@ -1,0 +1,66 @@
+ body{
+    background-color: white; 
+} 
+
+.header-content{
+    position: relative;
+    width: 100%;
+    padding: 100px 15px;
+    text-align: center;
+    z-index: 2; 
+}
+ 
+.header{
+    background-image:url("banner_nasa.png");
+    background-repeat:no-repeat;
+    background-size:contain;
+    background-position:center;
+    background-color: black !important;
+    height: 220px;
+}
+
+.cursive {
+    font-family: normal;
+	font-size: 55px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: bold;
+	line-height: 90px;
+    color: #000;
+}
+
+.description{
+    color: #000;
+    font-family: normal;
+	font-size: 20px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: 500;
+	line-height: 80px;
+}
+
+.btn-xl {
+    padding: 20px 20px;
+    font-size: 20px;
+}
+
+.btn.btn-primary {
+    color: black;
+    background-color: transparent;
+    border:1px solid #f0f0f0;
+    border-color: black;/*#f0f0f0;*/
+    -webkit-transition: all .35s;
+    -moz-transition: all .35s;
+    transition: all .35s;
+}
+
+.btn.btn-primary:hover {
+    opacity: 0.7;
+    background-color: DarkBlue;
+}
+
+.btn {
+    border: 0;
+    border-radius: 290px;
+    font-family: 'Helvetica Neue',Arial,sans-serif;
+}
